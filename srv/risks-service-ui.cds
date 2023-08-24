@@ -1,13 +1,12 @@
 using RiskService from './risk-service';
 
 annotate RiskService.Risks with {
-	title       @title: 'Title';
-	prio        @title: 'Priority';
-	descr       @title: 'Description';
-	miti        @title: 'Mitigation';
+	title       @title: 'Types of risks';
+	prio        @title: '% of Risks';
+	descr       @title: 'Skills';
+	miti        @title: 'Introduce new approaches';
 	impact      @title: 'Impact';
 }
-
 annotate RiskService.Mitigations with {
 	ID @(
 		UI.Hidden,

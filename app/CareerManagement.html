@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Career Management</title>
+  <link rel="stylesheet" href="./styles.css">
+  
+  <!-- Include UI5 library -->
+  <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js"
+          id="sap-ui-bootstrap"
+          data-sap-ui-theme="sap_fiori_3"
+          data-sap-ui-libs="sap.m"
+          data-sap-ui-compatVersion="edge"
+          data-sap-ui-async="true"
+          data-sap-ui-resourceroots='{
+            "ns.recruitment": "./"
+          }'></script>
+</head>
+<body class="sapUiBody">
+  <header>
+    <a href="index.html"><img src="https://logos-world.net/wp-content/uploads/2022/01/Aldi-Logo-700x394.png"  alt="Aldi Logo" class="logo"></a>
+    <h1>Career Management</h1>
+  </header>
+
+  <div id="careerManagementContent">
+    <h2>Skills Needed</h2>
+    <ul id="skillsNeededList"></ul>
+  </div>
+  
+  <button id="returnButton" class="return-button">Return to Job Positions</button>
+  <button id="viewCoursesButton" class="view-courses-button">View Courses</button>
+  
+  <script>
+    // Load Career Management functionality when the page loads
+    window.onload = loadCareerManagement;
+
+    // Function to load Career Management functionality
+    async function loadCareerManagement() {
+      // Load Skills Needed data
+      const response = await fetch('/odata/v4/recruitment/SkillsNeeded');
+      const skillsNeededData = await response.json();
+      
+      // Create UI5 List control
+      const list = new sap.m.List({
+        items: skillsNeededData.value.map(skill => {
+          return new sap.m.StandardListItem({
+            title: skill.skill,
+            description: skill.description
+          });
+        })
+      });
+
+      // Place the List control into the designated HTML element
+      const skillsNeededList = document.getElementById('skillsNeededList');
+      list.placeAt(skillsNeededList);
+    }
+
+    // Event listener for the return button
+    document.getElementById("returnButton").addEventListener("click", function() {
+      window.location.href = "JobPositions.html"; // Replace with the correct path
+    });
+
+    // Event listener for the view courses button
+    document.getElementById("viewCoursesButton").addEventListener("click", function() {
+      window.location.href = "SkillCourses.html"; // Replace with the correct path
+    });
+  </script>
+</body>
+</html>

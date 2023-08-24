@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Job Positions</title>
+  <link rel="stylesheet" href="./styles.css">
+  
+  <!-- Inclua a biblioteca UI5 -->
+  <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js"
+          id="sap-ui-bootstrap"
+          data-sap-ui-theme="sap_fiori_3"
+          data-sap-ui-libs="sap.m"
+          data-sap-ui-compatVersion="edge"
+          data-sap-ui-async="true"
+          data-sap-ui-resourceroots='{
+            "ns.recruitment": "./"
+          }'></script>
+</head>
+<body class="sapUiBody">
+  <header>
+    <a href="index.html"><img src="https://logos-world.net/wp-content/uploads/2022/01/Aldi-Logo-700x394.png"  alt="Aldi Logo" class="logo"></a>
+    <h1 >Job Positions </h1>
+  </header>
+
+  <div id="jobPositionsList">
+    <!-- As vagas de emprego serão exibidas aqui -->
+  </div>
+  <button id="returnButton" class="return-button">Return to Home Page</button>
+  <button id="createProfileButton" class="create-profile-button">Create your profile</button>
+  <script>
+    // Função para buscar e exibir as vagas de emprego
+    async function fetchJobPositions() {
+      try {
+        const response = await fetch('/odata/v4/recruitment/JobPositions');
+        const data = await response.json();
+
+        const list = new sap.m.List({
+          headerText: "Job Positions",
+          headerTextClass: "centered-header", 
+          items: data.value.map(job => {
+            const listItem = new sap.m.StandardListItem({
+              title: job.title,
+              description: job.description,
+              info: `Department: ${job.department}`,
+              infoState: job.isOpen ? sap.ui.core.ValueState.Success : sap.ui.core.ValueState.Error
+            });
+
+  
+
+            // Adicione um evento de clique para redirecionar para a página de detalhes
+            listItem.attachPress(function() {
+              window.location.href = `JobApplication.html?jobId=${job.ID}`; // Substitua pelo caminho correto
+            });
+
+            return listItem;
+          })
+        });
+
+        
+
+        const jobPositionsList = document.getElementById('jobPositionsList');
+        list.placeAt(jobPositionsList);
+
+        // Evento de clique para o botão de retorno
+        document.getElementById("returnButton").addEventListener("click", function() {
+          window.location.href = "JobPositions.html"; // Substitua pelo caminho correto
+        });
+      } catch (error) {
+        console.error("Error fetching job positions:", error);
+      }
+    }
+    document.getElementById("createProfileButton").addEventListener("click", function() {
+      window.location.href = "Application.html"; // Substitua pelo caminho correto
+    });
+    // Chama a função ao carregar a página
+    window.onload = fetchJobPositions;
+  </script>
+</body>
+</html>

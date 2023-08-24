@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Aldi HR Recruitment</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Include SAP Fiori 3 theme -->
+  <link rel="stylesheet" href="https://openui5.hana.ondemand.com/resources/sap/ui/core/themes/sap_fiori_3/library.css">
+
+  
+  <!-- Include UI5 Core Styles -->
+  <link rel="stylesheet" href="https://openui5.hana.ondemand.com/resources/sap/ui/core/themes/base/fonts/72-Regular.woff">
+  
+  <link rel="stylesheet" href="./styles.css">
+
+</head>
+<body>
+  <header>
+   
+    <a href="index.html"><img src="https://logos-world.net/wp-content/uploads/2022/01/Aldi-Logo-700x394.png"  alt="Aldi Logo" class="logo"></a>
+    <h1> Aldi Internal Recruitment</h1></header>
+
+  <main>
+    <section>
+      
+ 
+      <h4>Empowering Careers, Enriching Lives</h4>
+    </section>
+    <section>
+      <!-- Use UI5 elements here -->
+  
+      <button class="sapMBtnDefault" id="loginButton">Restricted for HR</button>
+      <button class="sapMButton" id="jobPositionsButton">Employee Platform</button>
+    
+      <script>
+      
+    
+        document.getElementById("loginButton").addEventListener("click", function () {
+          window.location.href = " hr.html "; 
+        });
+    
+        document.getElementById("jobPositionsButton").addEventListener("click", function () {
+          window.location.href = "JobPositions.html"; 
+        });
+      </script>
+    </section>
+    <section>
+      <h2>Employee Growth</h2>
+      <div style="max-width: 300px; margin: auto;">
+        <canvas id="growthChart1" width="300" height="300"></canvas>
+      </div>
+      <p style="text-align: center; margin-top: 15px;">Together, we'll achieve remarkable growth.</p>
+    </section>
+    
+    <section>
+      
+      <div style="max-width: 400px; margin: auto;">
+        <canvas id="growthChart2" width="400" height="400"></canvas>
+      </div>
+    
+    </section>
+    
+    <script>
+      // Dados do gráfico
+      var chartData1 = {
+        labels: ["Development", "Advancement", "Progress", "Expansion"],
+        datasets: [
+          {
+            data: [100, 120, 150, 180],
+            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50"],
+            hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50"]
+          }
+        ]
+      };
+    
+      // Opções do gráfico
+      var chartOptions1 = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              font: {
+                size: 14
+              }
+            }
+          }
+        }
+      };
+    
+      // Criação do gráfico
+      var ctx1 = document.getElementById("growthChart1").getContext("2d");
+      new Chart(ctx1, {
+        type: "doughnut",
+        data: chartData1,
+        options: chartOptions1
+      });
+
+     
+   
+    </script>
+  </main>
+</body>
+</html>

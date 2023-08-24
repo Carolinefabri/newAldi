@@ -1,0 +1,41 @@
+###
+#
+# Browse Job Positions
+#
+GET http://localhost:4004/odata/v4/recruitment/JobPositions
+
+###
+#
+# Get Job Position with ID 1
+#
+GET http://localhost:4004/odata/v4/recruitment/JobPositions(1)
+
+###
+#
+# Update Job Position with ID 1
+#
+PATCH http://localhost:4004/odata/v4/recruitment/JobPositions(1)
+Content-Type: application/json
+
+{
+  "title": "Updated Position Title"
+}
+
+###
+#
+# Create Application
+#
+POST http://localhost:4004/odata/v4/recruitment/Applications
+Content-Type: application/json
+
+{
+  "jobPositionID": 1,
+  "firstName": "John",
+  "lastName": "Doe",
+  "fullName": "John Doe",
+  "email": "john@example.com",
+  "resume": "base64-encoded-resume-data",
+  "status": "Submitted",
+  "hardSkills": "Java Programming",
+  "softSkills": "Communication"
+}

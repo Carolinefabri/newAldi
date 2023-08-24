@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HR Dashboard</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="https://openui5.hana.ondemand.com/1.88.0/resources/sap/ui/core/themes/sap_fiori_3/library.css">
+  <script src="https://openui5.hana.ondemand.com/1.88.0/resources/sap-ui-core.js" id="sap-ui-bootstrap"
+      data-sap-ui-libs="sap.ui.core, sap.m"
+      data-sap-ui-theme="sap_fiori_3"
+      data-sap-ui-async="true"
+      data-sap-ui-compatVersion="edge"
+      data-sap-ui-frameOptions="allow"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+  <script>
+    sap.ui.getCore().attachInit(function () {
+      new sap.m.Shell({
+        app: new sap.ui.core.ComponentContainer({
+          name: "YourComponentName"
+        }),
+        title: "HR Dashboard"
+      }).placeAt("content");
+    });
+
+    function viewMetrics() {
+      window.location.href = "/risks/webapp/index.html";
+    }
+
+    // Código para criar o gráfico usando Chart.js
+    function createChart() {
+      var ctx = document.getElementById("chartCanvas").getContext("2d");
+      var myChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["Before", "After"],
+          datasets: [{
+            label: "Employee Turnover",
+            data: [15, 5],
+            backgroundColor: ["rgba(75, 192, 192, 0.2)", "rgba(54, 162, 235, 0.2)"],
+            borderColor: ["rgba(75, 192, 192, 1)", "rgba(54, 162, 235, 1)"],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+  </script>
+</head>
+<body class="sapUiBody">
+  <header>
+    <nav class="main-navigation">
+      <a href="index.html"><img src="https://logos-world.net/wp-content/uploads/2022/01/Aldi-Logo-700x394.png"  alt="Aldi Logo" class="logo"></a>
+      <h1>HR Dashboard</h1>
+    </nav>
+  </header>
+  
+  <nav class="sub-navigation">
+    <a href="/risks/webapp/index.html" class="sub-nav-link" onclick="viewMetrics()">Metrics | </a>
+    <a href="#" class="sub-nav-link" onclick="viewEmployeeProfiles()">Employee Profiles |</a>
+    <a href="Jobs.html" class="sub-nav-link" onclick="viewOpenPositions()">Open Positions |</a>
+    <a href="#" class="sub-nav-link" onclick="createJobVacancy()">Create Job Vacancy |</a>
+    <a href="#" class="sub-nav-link" onclick="searchEmployeesBySkills()">Search Employees by Skills</a>
+  </nav>
+
+  <main>
+    <div id="content" class="sapUiContentPadding">
+      <h2>The Power of Employee Growth</h2>
+      <p>Investing in employee development leads to numerous benefits for both individuals and the company as a whole. Explore below to understand why it matters:</p>
+      
+   
+     <!-- Gráfico de Taxa de Rotatividade -->
+<div class="chart" id="chartContainer">
+  <h5 >Employee turnover significantly reduced after implementing career development programs.</h5>
+  <canvas id="employeeTurnoverChart"></canvas>
+      
+      </div>
+      
+    <!-- Diversidade e Inclusão -->
+<div class="diversity-inclusion">
+  <h3>Promoting Diversity and Inclusion in the Company</h3>
+  <p>Our core value of "Responsibility" ensures that we treat our employees, customers, and business partners fairly. Therefore, we are committed to providing all colleagues and applicants with equal and fair opportunities, regardless of factors such as age, social or biological gender, sexual orientation, ethnic or national origin, religion or belief, disability, marital or partnership status, with part-time or temporary employment.</p>
+  <p>Our goal is to build a diverse and inclusive workforce that values diversity in all its forms, positively impacting the business and well-being, and driving our competitive advantage.</p>
+  
+  <div class="image">
+    <img src="https://static.it-jobs.aldi-sued.de/_processed_/8/e/csm_Diversity-Week-ALDI-SUED_Header_a0846203bb.jpg" alt="Diversity and Inclusion" style="width: 100%; height: auto;">
+  </div>
+</div>
+
+      
+    <!-- Recrutamento e Treinamento na Aldi -->
+<div class="recruitment-training">
+  <h3>Recruitment and Training at Aldi</h3>
+  <p>Discover how we prioritize recruitment and training to build a skilled and motivated workforce.
+     Our commitment to employee development leads to a positive impact on our team and company success.</p>
+</div>
+
+      
+      <!-- Vídeo sobre Programas de Desenvolvimento -->
+      <div class="video">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/b2SPLq9gww8" title="Recruitment and Training at Aldi – Laura Domone" frameborder="0" allow="accelerometer; autoplay;
+         clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
+    <script>
+      const employeeTurnoverChart = document.getElementById("employeeTurnoverChart").getContext("2d");
+      
+      new Chart(employeeTurnoverChart, {
+        type: "bar",
+        data: {
+          labels: ["Before", "After"],
+          datasets: [{
+            label: "Employee Turnover",
+            data: [15, 5], // Exemplo de dados (antes e depois)
+            backgroundColor: ["rgba(75, 192, 192, 0.2)", "rgba(75, 192, 192, 0.2)"],
+            borderColor: ["rgba(75, 192, 192, 1)", "rgba(75, 192, 192, 1)"],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
+    
+  </main>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Job Application</title>
+  <link rel="stylesheet" href="./styles.css">
+  
+  <!-- Inclua a biblioteca UI5 -->
+  <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js"
+          id="sap-ui-bootstrap"
+          data-sap-ui-theme="sap_fiori_3"
+          data-sap-ui-libs="sap.m"
+          data-sap-ui-compatVersion="edge"
+          data-sap-ui-async="true"
+          data-sap-ui-resourceroots='{
+            "ns.recruitment": "./"
+          }'></script>
+</head>
+<body class="sapUiBody">
+  <header>
+    <a href="index.html"><img src="https://logos-world.net/wp-content/uploads/2022/01/Aldi-Logo-700x394.png"  alt="Aldi Logo" class="logo"></a>
+    <h1>Job Application</h1>
+  </header>
+
+  <div id="jobDetails">
+    <!-- Formulário para a candidatura -->
+    <div class="title-container">
+        <h2 class="main-title">Apply for the Job</h2>
+        <p class="sub-title">or Create a Profile for Future Opportunities</p>
+      </div>
+      
+    <form id="applicationForm">
+      <label for="fullNameInput">Full Name:</label>
+      <input type="text" id="fullNameInput" required><br>
+      
+      <label for="emailInput">Email:</label>
+      <input type="email" id="emailInput" required><br>
+      
+      <label for="jobInterestInput">Job Interest:</label>
+      <input type="text" id="jobInterestInput" required><br>
+      
+      <label for="hardSkillsTextArea">Hard Skills:</label>
+      <textarea id="hardSkillsTextArea" rows="4"></textarea><br>
+      
+      <label for="softSkillsTextArea">Soft Skills:</label>
+      <textarea id="softSkillsTextArea" rows="4"></textarea><br>
+      
+      <label for="resumeUpload">Resume:</label>
+      <input type="file" id="resumeUpload" accept=".pdf,.doc,.docx" ><br>
+      
+      <label for="coverLetterTextArea">Cover Letter:</label>
+      <textarea id="coverLetterTextArea" rows="4"></textarea><br>
+      
+      <div class="button-container">
+        <button type="submit" class="button-primary">Submit Application</button>
+   
+      </div>
+      
+    </form>
+
+         <button id="returnButton" class="button-secondary">Return to Job List</button>
+  </div>
+  
+  <script>
+    // Obter o ID da vaga de emprego da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const jobId = urlParams.get("jobId");
+  
+    // Manipulador de evento para o envio do formulário
+    document.getElementById("applicationForm").addEventListener("submit", async function(event) {
+      event.preventDefault(); // Evita o envio padrão do formulário
+      
+      // Coleta dos dados do formulário
+      const fullName = document.getElementById("fullNameInput").value;
+      const email = document.getElementById("emailInput").value;
+      const jobInterest = document.getElementById("jobInterestInput").value;
+      const hardSkills = document.getElementById("hardSkillsTextArea").value;
+      const softSkills = document.getElementById("softSkillsTextArea").value;
+      const resume = document.getElementById("resumeUpload").files[0];
+      const coverLetter = document.getElementById("coverLetterTextArea").value;
+      
+      // Criação do objeto FormData para enviar os dados
+      const formData = new FormData();
+      formData.append("fullName", fullName);
+      formData.append("email", email);
+      formData.append("jobInterest", jobInterest);
+      formData.append("hardSkills", hardSkills);
+      formData.append("softSkills", softSkills);
+      formData.append("resume", resume);
+      formData.append("coverLetter", coverLetter);
+      
+      // Envio dos dados para o servidor usando a função fetch
+      try {
+        const response = await fetch("/api/submitApplication", {
+          method: "POST",
+          body: formData
+        });
+        
+        if (response.ok) {
+          // Dados enviados com sucesso
+          alert("Application submitted successfully!");
+        } else {
+          // Ocorreu um erro no envio
+          alert("An error occurred while submitting the application.");
+        }
+      } catch (error) {
+        console.error("Error submitting application:", error);
+      }
+    });
+  
+    // Evento de clique para o botão de retorno
+    document.getElementById("returnButton").addEventListener("click", function() {
+      window.location.href = "JobPositions.html"; 
+    });
+  </script>
+  
+</body>
+</html>
