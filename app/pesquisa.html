@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Search Employees by Skills</title>
+  <link rel="stylesheet" href="https://openui5.hana.ondemand.com/resources/sap/ui/core/themes/sap_fiori_3/library.css">
+  <link rel="stylesheet" href="./styles.css"> <!-- Incluindo seu arquivo de estilos -->
+  <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js"
+          id="sap-ui-bootstrap"
+          data-sap-ui-theme="sap_fiori_3"
+          data-sap-ui-libs="sap.m"
+          data-sap-ui-compatVersion="edge"
+          data-sap-ui-async="true"
+          data-sap-ui-resourceroots='{
+            "ns.recruitment": "./"
+          }'></script>
+</head>
+<body class="sapUiBody">
+
+ 
+  <header>
+    <a href="index.html"><img src="https://logos-world.net/wp-content/uploads/2022/01/Aldi-Logo-700x394.png" alt="Aldi Logo" class="logo"></a>
+    <h1>Search Employees by Skills</h1>
+  </header>
+  <nav class="sub-navigation">
+    <a href="hr.html" class="sub-nav-link">🔙 </a> 
+  
+</nav>
+
+  <!-- Conteúdo da Página -->
+  <div id="content" class="container">
+
+    <div class="search-container">
+      <div class="title-container">
+        <h1 class="main-title">Search Employees by Skills</h1>
+        <p class="sub-title">Find the perfect candidate based on skills</p>
+      </div>
+    
+    <!-- Field for entering skills -->
+    <label for="skillsInput">Enter Skills:</label>
+    <input type="text" id="skillsInput" placeholder="Enter skills separated by commas">
+    <button onclick="searchCandidates()">Search</button>
+    <button onclick="refreshResults()">Refresh</button>
+    
+    <!-- Search results -->
+    <div id="searchResults">
+        <h2>Search Results:</h2>
+        <ul id="candidatesList"></ul>
+    </div>
+
+    <script>
+        async function searchCandidates() {
+            const skillsInput = document.getElementById('skillsInput').value;
+            const skillsArray = skillsInput.split(',').map(skill => skill.trim());
+
+            // Send the skills list to the OData service
+            const candidates = await fetchCandidatesBySkills(skillsArray);
+
+            // Display the found candidates on the page
+            displayCandidates(candidates);
+        }
+
+        async function fetchCandidatesBySkills(skills) {
+            // Build the OData query URL
+            const skillsQueryString = skills.map(skill => `hardSkills eq '${skill}'`).join(' or ');
+            const url = `http://localhost:4004/odata/v4/recruitment/EmployeeProfiles?$filter=${skillsQueryString}`;
+
+            // Send an HTTP GET request to the OData service
+            const response = await fetch(url);
+
+            if (response.ok) {
+                const data = await response.json();
+                return data.value; // The list of candidates is in data.value
+            } else {
+                console.error('Error fetching candidates by skills.');
+                return [];
+            }
+        }
+
+       
+function displayCandidates(candidates) {
+    const candidatesList = document.getElementById('candidatesList');
+    candidatesList.innerHTML = '';
+
+    if (candidates.length === 0) {
+        candidatesList.innerHTML = '<p>No candidates found.</p>';
+    } else {
+      candidates.forEach(candidate => {
+    console.log(candidate); // Add this line for debugging
+    const listItem = document.createElement('li');
+    listItem.textContent = `${candidate.firstName} ${candidate.lastName} - Area: ${candidate.appliedArea}, Hard Skills: ${candidate.hardSkills.join(', ')}`;
+    candidatesList.appendChild(listItem);
+});
+
+    }
+}
+
+
+        function refreshResults() {
+            // Clear the input field and search results
+            document.getElementById('skillsInput').value = '';
+            document.getElementById('candidatesList').innerHTML = '';
+        }
+    </script>
+</body>
+</html>

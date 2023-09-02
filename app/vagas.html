@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Create New Job Position</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="https://openui5.hana.ondemand.com/resources/sap/ui/core/themes/sap_fiori_3/library.css">
+  <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js"
+          id="sap-ui-bootstrap"
+          data-sap-ui-theme="sap_fiori_3"
+          data-sap-ui-libs="sap.m"
+          data-sap-ui-compatVersion="edge"
+          data-sap-ui-async="true"></script>
+</head>
+<body class="sapUiBody">
+  <header>
+    <a href="index.html"><img src="https://logos-world.net/wp-content/uploads/2022/01/Aldi-Logo-700x394.png" alt="Aldi Logo" class="logo"></a>
+    <h1>Create New Job Position</h1>
+  </header>
+  <nav class="sub-navigation">
+    <a href="hr.html" class="sub-nav-link">🔙 </a> 
+  
+</nav>
+
+  <div id="jobDetails">
+    <div class="title-container">
+      <h2 class="main-title">New Job Position</h2>
+   
+    
+    <form id="newJobForm">
+      <label for="jobTitleInput">Job Title:</label>
+      <input type="text" id="jobTitleInput" required><br>
+      
+      <label for="jobDescriptionInput">Job Description:</label>
+      <textarea id="jobDescriptionInput" rows="4" required></textarea><br>
+      
+      <label for="requirementsInput">Requirements:</label>
+      <textarea id="requirementsInput" rows="4" required></textarea><br>
+      
+      <div class="button-container">
+        <button type="submit" class="button-primary">Create Job</button>
+      </div>
+    </form>
+
+  
+  <script>
+    const newJobForm = document.getElementById("newJobForm");
+
+    newJobForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const jobTitle = document.getElementById("jobTitleInput").value;
+      const jobDescription = document.getElementById("jobDescriptionInput").value;
+      const requirements = document.getElementById("requirementsInput").value;
+
+      // Aqui você pode enviar os dados para o servidor ou realizar outras ações
+      console.log("Job Title:", jobTitle);
+      console.log("Job Description:", jobDescription);
+      console.log("Requirements:", requirements);
+    });
+
+    document.getElementById("returnButton").addEventListener("click", function() {
+      window.location.href = "JobPositions.html"; 
+    });
+  </script>
+</body>
+</html>

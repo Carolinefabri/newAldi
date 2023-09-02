@@ -42,6 +42,15 @@ entity DevelopmentCourses {
   courseDescription: String(255);
 }
 
+entity EmployeeProfiles {
+  key ID: Integer;
+  firstName: String;
+  lastName: String;
+  appliedArea: String;
+  hardSkills: String(255);
+  softSkills: String(255);
+  resumeUrl: String;
+}
 
 
 }

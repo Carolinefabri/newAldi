@@ -54,3 +54,12 @@ entity CareerGoal {
   skillsRequired: Association to many SkillsNeeded on $self.ID = skillsRequired.careerGoalID;
   developmentCourses: Association to many DevelopmentCourses on $self.ID = developmentCourses.careerGoalID;
 }
+entity EmployeeProfiles {
+  key ID: Integer;
+  firstName: String;
+  lastName: String;
+  appliedArea: String;
+  hardSkills: String(255);
+  softSkills: String(255);
+  resumeUrl: String;
+}

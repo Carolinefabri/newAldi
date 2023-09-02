@@ -3,6 +3,7 @@
 body {
     font-family: '72-Regular', Arial, sans-serif;
     background-color: #f6f6f6;
+  
   }
   
   header {
@@ -197,6 +198,75 @@ body {
     text-decoration: none; /* Remova a decoração de sublinhado */
   }
 
-  .grafico {
-    
+ 
+  #jobDetails {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+
+  
+    transform: translate(-50%, -50%);
   }
+  
+  .search-box {
+    text-align: center; /* Centraliza os elementos horizontalmente */
+  }
+  
+  #searchButton {
+    /* Estilos para o botão */
+    /* ... outros estilos ... */
+    margin-top: 10px; /* Adicione margem superior para separar o botão da entrada */
+  }
+  
+
+  .content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Define a altura da div para ocupar toda a altura da tela */
+  }
+  
+
+  /* Estilo para a seção de resultados */
+  #searchResults {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+
+  /* Estilo para os resultados individuais (cada funcionário) */
+  .employee-result {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+
+  /* Estilo para o nome do funcionário */
+  .employee-name {
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  /* Estilo para as informações do funcionário */
+  .employee-info {
+    margin-top: 5px;
+    font-size: 16px;
+  }
+
+  /* Estilo para o link do currículo */
+  .resume-link {
+    margin-top: 5px;
+    font-size: 16px;
+    text-decoration: underline;
+    color: blue;
+  }
+

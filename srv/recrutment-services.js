@@ -82,6 +82,61 @@ srv.on('submitApplication', async req => {
 
 
 
+// Reply mock data for EmployeeProfiles
+srv.on('READ', 'EmployeeProfiles', () => [
+  {
+    ID: 1,
+    firstName: "Carlos",
+    lastName: "Silva",
+    appliedArea: "Software Development",
+    hardSkills: ["Java", "Spring Framework", "Database"],
+    softSkills: ["Communication", "Teamwork", "Problem Solving"],
+    resumeUrl: "resume1.pdf",
+  },
+  {
+    ID: 2,
+    firstName: "Fernanda",
+    lastName: "Santos",
+    appliedArea: "Cybersecurity",
+    hardSkills: ["Java", "Network Security", "Firewalls"],
+    softSkills: ["Analytical Thinking", "Incident Management", "Professional Ethics"],
+    resumeUrl: "resume2.pdf",
+  },
+  {
+    ID: 3,
+    firstName: "Paulo",
+    lastName: "Oliveira",
+    appliedArea: "Database Administration",
+    hardSkills: ["Java", "Oracle", "SQL"],
+    softSkills: ["Problem Solving", "Project Management", "Communication"],
+    resumeUrl: "resume3.pdf",
+  },
+  {
+    ID: 4,
+    firstName: "Isabela",
+    lastName: "Martins",
+    appliedArea: "Web Development",
+    hardSkills: ["Java", "JavaScript", "Front-end Frameworks"],
+    softSkills: ["Creativity", "Teamwork", "Adaptability"],
+    resumeUrl: "resume4.pdf",
+  },
+  {
+    ID: 5,
+    firstName: "Rafael",
+    lastName: "Gomes",
+    appliedArea: "Software Engineering",
+    hardSkills: ["Java", "Agile Development", "Microservices"],
+    softSkills: ["Technical Leadership", "Conflict Resolution", "Innovation"],
+    resumeUrl: "resume5.pdf",
+  },
+]);
 
-  };
-  
+
+// Certifique-se de definir a rota OData para a entidade EmployeeProfiles:
+srv.on('READ', 'EmployeeProfiles', (req) => {
+  return srv.query(SELECT.from(EmployeeProfiles));
+});
+
+
+// ...
+};
