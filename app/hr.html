@@ -12,45 +12,7 @@
       data-sap-ui-compatVersion="edge"
       data-sap-ui-frameOptions="allow"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-  <script>
-    sap.ui.getCore().attachInit(function () {
-      new sap.m.Shell({
-        app: new sap.ui.core.ComponentContainer({
-          name: "YourComponentName"
-        }),
-        title: "HR Dashboard"
-      }).placeAt("content");
-    });
-
-    function viewMetrics() {
-      window.location.href = "/risks/webapp/index.html";
-    }
-
-    // Código para criar o gráfico usando Chart.js
-    function createChart() {
-      var ctx = document.getElementById("chartCanvas").getContext("2d");
-      var myChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: ["Before", "After"],
-          datasets: [{
-            label: "Employee Turnover",
-            data: [15, 5],
-            backgroundColor: ["rgba(75, 192, 192, 0.2)", "rgba(54, 162, 235, 0.2)"],
-            borderColor: ["rgba(75, 192, 192, 1)", "rgba(54, 162, 235, 1)"],
-            borderWidth: 1
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
-        }
-      });
-    }
-  </script>
+ 
 </head>
 <body class="sapUiBody">
   <header>
@@ -134,6 +96,7 @@
         }
       });
     </script>
+  
     
   </main>
 </body>
